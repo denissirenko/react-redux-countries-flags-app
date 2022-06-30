@@ -23,6 +23,6 @@ export const loadCountries =
 
     client
       .get(api.ALL_COUNTRIES)
-      .then(({ data }) => dispatch(setCountries(date)))
+      .then(({ data }) => dispatch(setCountries(data)))
       .catch((err) => dispatch(setError(err.message)));
   };
