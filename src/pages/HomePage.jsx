@@ -17,6 +17,8 @@ export const HomePage = () => {
   const countries = useSelector((state) => selectVisibleCounries(state, { search, region }));
   const { status, error, qty } = useSelector(selectCoutriesInfo);
 
+  console.log(countries);
+
   useEffect(() => {
     if (!qty) {
       dispatch(loadCountries());
@@ -29,7 +31,10 @@ export const HomePage = () => {
 
       {error && <h2>Can't fetch data</h2>}
       {status === 'loading' && <h2>Loading...</h2>}
-      {status === 'received' && (
+      {status === 'received' && countries.length === 0 && (
+        <h2>Nothing was found for your search, please try another information.</h2>
+      )}
+      {status === 'received' && countries.length > 0 && (
         <List>
           {countries.map((c) => {
             const countryInfo = {
